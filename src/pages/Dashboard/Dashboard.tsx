@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { getEmployees } from '../../services/employee.service';
 import { Employee } from '../../interfaces/employee';
 import { EmployeeTable } from '../../components/EmployeeTable/EmployeeTable';
 import TextInput from '../../components/TextInput/TextInput';
 import './Dashboard.scss'
+import EmployeeNewForm from '../../components/EmployeeNewForm/EmployeeNewForm';
 
 const debounceTimeout = 500;
 const debounce = <F extends (...args: any[]) => any>(
@@ -21,11 +22,19 @@ const debounce = <F extends (...args: any[]) => any>(
   return debounced;
 }
 
-export const Dashboard = () => {
+
+interface Props {
+  userType?: string;
+}
+
+export const Dashboard = ({ userType }: Props) => {
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [loading, setLoading] = useState(true);
   const [filterColumn, setFilterColumn] = useState('');
   const [filterColumnAsc, setFilterColumnAsc] = useState(true);
+  const shouldShowEditor = useMemo(() => {
+    return userType === 'editor';
+  }, [userType]);
 
   useEffect(() => {
     // Initial data fetch
@@ -83,12 +92,28 @@ export const Dashboard = () => {
     setFilterColumn(columnName);
   }
 
+  const handleDelete = (item: Employee) => {
+    alert('Back-end request to delete');
+  }
+  const handleAddNew = (item: Employee) => {
+    alert('Back-end request to add new');
+  }
+
   return (
     <div className="dashboard">
       <div className="dashboard__filters-container">
         <TextInput fullWidth handleChange={handleQueryChange} name={'table-query'} label="Filter query" />
       </div>
-      {loading ? <p>Loading...</p> : <EmployeeTable data={employees} handleColumnClick={handleColumnClick} />}
+      {loading ? (<p>Loading...</p>) : (
+        <div className="dashboard__data-container">
+          <EmployeeTable data={employees} handleDeleteClick={shouldShowEditor ? handleDelete : undefined}
+                         handleColumnClick={handleColumnClick} />
+
+          {shouldShowEditor && <div className="dashboard__data-container__editor">
+            <EmployeeNewForm handleSubmit={handleAddNew} />
+          </div>}
+        </div>
+      )}
     </div>
   );
 }

@@ -8,4 +8,10 @@
     margin-bottom: 2*$step;
     width: 100%;
   }
+
+  &__data-container {
+    &__editor {
+      margin-top: 2*$step;
+    }
+  }
 }

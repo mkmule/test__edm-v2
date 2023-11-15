@@ -7,7 +7,7 @@ import Button from '../../components/Button/Button';
 import { postLogin } from '../../services/login.service';
 
 interface Props {
-  handleLoginSuccess: () => void;
+  handleLoginSuccess: (userType: string) => void;
 }
 
 export const Login = ({ handleLoginSuccess }: Props) => {
@@ -29,8 +29,8 @@ export const Login = ({ handleLoginSuccess }: Props) => {
 
     // Validate login with back-end
     postLogin({ username, password })
-      .then(() => {
-        handleLoginSuccess();
+      .then(({ type: userType }) => {
+        handleLoginSuccess(userType);
       })
       .catch((error) => {
         setError(error.displayError);
