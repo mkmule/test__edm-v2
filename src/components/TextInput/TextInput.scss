@@ -1,0 +1,45 @@
+@import 'src/styles/variables';
+
+.text-input {
+  $root: &;
+
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+  &__label {
+    margin-bottom: $step/2;
+    color: $color-palette-2;
+  }
+
+  &__input-field {
+    border: none; // Preserve order
+
+    background-color: transparent;
+    border-bottom: 1px solid $color-palette-4;
+    text-align: center;
+    transition: all ease-in-out 200ms;
+
+    &:focus {
+      border-bottom: 1px solid $color-palette-2;
+      outline: none;
+    }
+
+    &::placeholder {
+      opacity: 0.5;
+    }
+  }
+
+  &__error {
+    font-size: 0.8rem;
+    color: $color-error;
+  }
+
+  &--full-width {
+    width: 100%;
+
+    #{$root}__input-field {
+      width: 100%;
+    }
+  }
+}
