@@ -1,0 +1,10 @@
+@import 'src/styles/variables';
+
+.dashboard {
+  min-width: 500px;
+
+  &__filters-container {
+    margin-bottom: 2*$step;
+    width: 100%;
+  }
+}
