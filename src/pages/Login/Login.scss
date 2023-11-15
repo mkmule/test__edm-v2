@@ -1,12 +1,13 @@
 @import 'src/styles/variables';
+@import 'src/styles/animations';
 
 .login {
   border-radius: $step;
   border: 1px solid $color-palette-4;
+  padding: 2*$step;
 
   &__form {
     min-width: 300px;
-    padding: 2*$step;
 
     &__inputs {
       align-items: center;
@@ -29,5 +30,12 @@
       justify-content: center;
       margin-top: 2*$step;
     }
+  }
+
+  &__error {
+    text-align: center;
+    color: $color-error;
+    margin: $step 0 0;
+    animation: animation-fade-in 200ms;
   }
 }

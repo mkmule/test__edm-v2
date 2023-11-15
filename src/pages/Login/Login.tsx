@@ -4,12 +4,17 @@ import './Login.scss';
 import TextInput from '../../components/TextInput/TextInput';
 import { getPasswordValidationError } from './Login.helpers';
 import Button from '../../components/Button/Button';
+import { postLogin } from '../../services/login.service';
 
-export const Login = () => {
+interface Props {
+  handleLoginSuccess: () => void;
+}
+
+export const Login = ({ handleLoginSuccess }: Props) => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordError, setPasswordError] = useState('');
-
+  const [error, setError] = useState('');
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -21,6 +26,15 @@ export const Login = () => {
       // Form is not valid
       return;
     }
+
+    // Validate login with back-end
+    postLogin({ username, password })
+      .then(() => {
+        handleLoginSuccess();
+      })
+      .catch((error) => {
+        setError(error.displayError);
+      })
   }
 
   return (
@@ -36,6 +50,7 @@ export const Login = () => {
           <Button type="submit" fullWidth>Login</Button>
         </div>
       </form>
+      {error && <p className="login__error">{error}</p>}
     </div>
   );
 }
