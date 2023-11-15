@@ -4,12 +4,14 @@
   background-color: $color-palette-4;
   border-radius: $step;
   border: 1px solid $color-palette-2;
+  color: $color-palette-1;
   padding: $step 2*$step;
   transition: all ease-in-out 200ms;
 
   &:hover {
-    cursor: pointer;
     background-color: $color-palette-2;
+    color: $color-white;
+    cursor: pointer;
   }
 
   &--full-width {
