@@ -21,16 +21,15 @@ function App() {
   return (
     <div className="app">
       <header className="app__header">
-        This is header
+        Amazing brand logo here
       </header>
       <main className="app__main">
         {view === View.Login && <Login handleLoginSuccess={handleLoginSuccess} />}
         {view === View.Dashboard && <Dashboard />}
       </main>
       <footer className="app__footer">
-        This is footer
+        Copyright, contacts and Privacy policy
       </footer>
-
     </div>
   );
 }
