@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import './App.scss';
 import Login from './pages/Login/Login';
+import { Dashboard } from './pages/Dashboard/Dashboard';
 
 enum View {
   Login,
@@ -10,7 +11,7 @@ enum View {
 
 function App() {
   // Ideally we will use react-router
-  const [view, setView] = useState(View.Login)
+  const [view, setView] = useState(View.Dashboard)
 
 
   const handleLoginSuccess = () => {
@@ -24,7 +25,7 @@ function App() {
       </header>
       <main className="app__main">
         {view === View.Login && <Login handleLoginSuccess={handleLoginSuccess} />}
-        {view === View.Dashboard && <p>Dashboard page</p>}
+        {view === View.Dashboard && <Dashboard />}
       </main>
       <footer className="app__footer">
         This is footer

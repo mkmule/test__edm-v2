@@ -1,7 +1,4 @@
-interface LoginData {
-  username: string;
-  password: string;
-}
+import { LoginData } from '../interfaces/login';
 
 interface LoginResponsePayload {
   type: 'viewer' | 'editor'; // as example to show forced string type, in real case I would make it as enumeration
