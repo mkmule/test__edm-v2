@@ -11,9 +11,8 @@ enum View {
 
 function App() {
   // Ideally we will use react-router
-  const [view, setView] = useState(View.Dashboard)
-  const [userType, setUserType] = useState<string>('editor')
-
+  const [view, setView] = useState(View.Login)
+  const [userType, setUserType] = useState<string>()
 
   const handleLoginSuccess = (userType: string) => {
     setView(View.Dashboard);

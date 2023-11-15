@@ -8,7 +8,7 @@ interface PropsEmployeeRow {
 }
 
 const EmployeeRow = ({ item, handleDeleteClick }: PropsEmployeeRow) => (
-  <tr key={item.contact}>
+  <tr>
     <td>{item.company} {handleDeleteClick && <button onClick={() => handleDeleteClick(item)}>Delete</button>}
     </td>
     <td>{item.contact}</td>
@@ -38,7 +38,7 @@ export const EmployeeTable = ({ handleDeleteClick, data, handleColumnClick }: Pr
       </tr>
       </thead>
       <tbody>
-      {data.length ? (data.map(item => <EmployeeRow item={item} handleDeleteClick={handleDeleteClick} />)) : (
+      {data.length ? (data.map(item => <EmployeeRow key={item.uid} item={item} handleDeleteClick={handleDeleteClick} />)) : (
         <tr>
           <td colSpan={3}>No data</td>
         </tr>
