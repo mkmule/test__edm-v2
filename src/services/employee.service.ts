@@ -6,11 +6,6 @@ interface EmployeeResponsePayload {
 
 const allEmployees = [
   {
-    company: 'Company',
-    contact: 'Contact',
-    country: 'Country',
-  },
-  {
     company: 'Alfreds Futterkiste',
     contact: 'Maria Anders',
     country: 'Germany',
@@ -61,4 +56,14 @@ export const getEmployees = (query?: string): Promise<EmployeeResponsePayload> =
       resolve({ data: filteredEmployees });
     }, 3000);
   })
-}
+};
+
+export const postNewEmployee = (employee: Employee): Promise<void> => {
+  console.log(`Adding new: ${JSON.stringify(employee)}`);
+
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, 3000);
+  })
+};

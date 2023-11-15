@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { getEmployees } from '../../services/employee.service';
+import { getEmployees, postNewEmployee } from '../../services/employee.service';
 import { Employee } from '../../interfaces/employee';
 import { EmployeeTable } from '../../components/EmployeeTable/EmployeeTable';
 import TextInput from '../../components/TextInput/TextInput';
@@ -93,10 +93,21 @@ export const Dashboard = ({ userType }: Props) => {
   }
 
   const handleDelete = (item: Employee) => {
-    alert('Back-end request to delete');
+    alert(`Deleting: ${JSON.stringify(item)}`);
+    // TODO: Similar implementation to handleAddNew
   }
   const handleAddNew = (item: Employee) => {
-    alert('Back-end request to add new');
+    setLoading(true);
+    postNewEmployee(item)
+      .then(() => {
+        alert(`New employee added: ${JSON.stringify(item)}`);
+      })
+      .catch(() => {
+        // TODO: Add employee error handling
+      })
+      .finally(() => {
+        setLoading(false);
+      })
   }
 
   return (
